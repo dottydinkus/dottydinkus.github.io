@@ -1,14 +1,9 @@
 import numpy as np
 
-size = 1024
 inner_radius = 0.2
 outer_radius = 0.8
 circle_radius = (256 - 8) / 256
 half_angle_width = 0.15
-color = '#004499'
-
-assert size % 2 == 0
-half_size = size // 2
 
 
 def rotate(p, angle):
@@ -18,7 +13,10 @@ def rotate(p, angle):
     return c * x - s * y, s * x + c * y
 
 
-def main():
+def write_svg(color='#3498db', name='logo', size=1024):
+    assert size % 2 == 0
+    half_size = size // 2
+
     points = [
         (inner_radius, 0),
         rotate((outer_radius, 0), np.pi / 6 - half_angle_width),
@@ -47,12 +45,12 @@ def main():
     ]
     svg = '\n'.join(svg)
 
-    with open('logo.svg', 'w') as f:
+    with open(f'{name}.svg', 'w') as f:
         f.write(svg)
 
-    print('Command to generate logo.png:')
-    print(f'> PATH_TO_INKSCAPE -w {size} -h {size} logo.svg -o logo.png')
+    # print('Command to generate logo.png:')
+    # print(f'> PATH_TO_INKSCAPE -w {size} -h {size} logo.svg -o logo.png')
 
 
 if __name__ == '__main__':
-    main()
+    write_svg(color='#3498db', name='logo', size=1024)
